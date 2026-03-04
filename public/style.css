@@ -51,3 +51,38 @@ width:60%;
 margin:auto;
 margin-top:40px;
 }
+#signal-box{
+margin-top:20px;
+padding:20px;
+background:#1a1a1a;
+border-radius:10px;
+}
+
+#signal-indicator{
+font-size:32px;
+font-weight:bold;
+padding:10px;
+border-radius:8px;
+}
+
+.buy{
+color:#00ff99;
+animation:buyPulse 1s infinite;
+}
+
+.sell{
+color:#ff4d4d;
+animation:sellPulse 1s infinite;
+}
+
+@keyframes buyPulse{
+0%{box-shadow:0 0 5px #00ff99}
+50%{box-shadow:0 0 20px #00ff99}
+100%{box-shadow:0 0 5px #00ff99}
+}
+
+@keyframes sellPulse{
+0%{box-shadow:0 0 5px #ff4d4d}
+50%{box-shadow:0 0 20px #ff4d4d}
+100%{box-shadow:0 0 5px #ff4d4d}
+}
