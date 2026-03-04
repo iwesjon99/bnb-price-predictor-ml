@@ -27,8 +27,16 @@ let data=await response.json()
 document.getElementById("prediction").innerHTML=
 "Predicted Price: "+data.prediction
 
-document.getElementById("signal").innerHTML=
-"Signal: "+data.decision
+let signalBox=document.getElementById("signal-indicator")
+
+signalBox.innerHTML=data.decision
+
+if(data.decision=="BUY"){
+signalBox.className="buy"
+}
+else{
+signalBox.className="sell"
+}
 
 let ctx=document.getElementById("chart")
 
