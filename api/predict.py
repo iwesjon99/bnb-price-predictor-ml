@@ -1,24 +1,24 @@
 import pickle
-import json
 import numpy as np
 
-# load model
-model = pickle.load(open("model.pkl","rb"))
+# load trained model
+model = pickle.load(open("model.pkl", "rb"))
 
 def handler(request):
 
     data = request.json()
 
-    features = np.array([[
-        float(data["feature1"]),
-        float(data["feature2"]),
-        float(data["feature3"]),
-        float(data["feature4"])
-    ]])
+    open_price = float(data["Open"])
+    high_price = float(data["High"])
+    low_price = float(data["Low"])
+    volume = float(data["Volume"])
+
+    features = np.array([[open_price, high_price, low_price, volume]])
 
     prediction = model.predict(features)[0]
 
-    decision = "BUY" if prediction > 0 else "SELL"
+    # simple buy/sell logic
+    decision = "BUY" if prediction > open_price else "SELL"
 
     return {
         "prediction": float(prediction),
