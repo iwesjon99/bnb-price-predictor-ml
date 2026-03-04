@@ -1,9 +1,9 @@
 async function predict(){
 
-let f1=document.getElementById("f1").value
-let f2=document.getElementById("f2").value
-let f3=document.getElementById("f3").value
-let f4=document.getElementById("f4").value
+let open=document.getElementById("open").value
+let high=document.getElementById("high").value
+let low=document.getElementById("low").value
+let volume=document.getElementById("volume").value
 
 let response=await fetch("/api/predict",{
 
@@ -14,31 +14,38 @@ headers:{
 },
 
 body:JSON.stringify({
-feature1:f1,
-feature2:f2,
-feature3:f3,
-feature4:f4
+open:open,
+high:high,
+low:low,
+volume:volume
 })
 
 })
 
 let data=await response.json()
 
-document.getElementById("result").innerHTML=
-"Prediction: "+data.prediction+" | "+data.decision
+document.getElementById("prediction").innerHTML=
+"Predicted Price: "+data.prediction
 
+document.getElementById("signal").innerHTML=
+"Signal: "+data.decision
 
 let ctx=document.getElementById("chart")
 
 new Chart(ctx,{
-type:"line",
+
+type:"bar",
+
 data:{
-labels:["Prediction"],
+labels:["Open Price","Predicted Price"],
+
 datasets:[{
-label:"Stock Value",
-data:[data.prediction]
+label:"Price Comparison",
+data:[open,data.prediction]
 }]
+
 }
+
 })
 
 }
